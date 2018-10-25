@@ -1,0 +1,19 @@
+version: '2'
+
+services:
+  python:
+    container_name: lac_python
+    build:
+      context: .
+      dockerfile: dev/python/Dockerfile
+    volumes:
+      - .:/lac
+    ports:
+      - "32001:8000"
+    depends_on:
+      - db
+    command: python3 manage.py runserver 0.0.0.0:8000
+
+  db:
+    container_name: lac_db
+    image: postgres:11.0

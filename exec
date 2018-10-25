@@ -1,0 +1,43 @@
+#!/bin/bash
+
+function error {
+    # ERROR OUTPUT
+    COLOR='\033[41m'
+    RESET='\033[0m'
+
+    echo -e ${COLOR}${1}${RESET}
+}
+
+if [ ! $# = 1 ]; then
+    error "Only one argument allowed!"
+fi
+
+command=''
+for cmd in "$@"
+do
+    case ${cmd} in
+        p|python)
+            command="docker-compose exec python bash"
+            ;;
+        m|db|psgr|postgres)
+            command="docker-compose exec db bash"
+            ;;
+        s|start)
+            command="docker-compose start"
+            ;;
+        stop)
+            command="docker-compose stop"
+            ;;
+        restart)
+            command="docker-compose stop && docker-compose start"
+            ;;
+        up)
+            command="docker-compose up -d"
+            ;;
+        reup|re-up|ru)
+            command="docker-compose down && docker-compose up -d"
+            ;;
+    esac
+done
+
+${command}

@@ -17,3 +17,5 @@ services:
   db:
     container_name: lac_db
     image: postgres:11.0
+    ports:
+      - "32002:5432"

@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 
-cd ..
+cd ../..
 sudo chown -R ${USER}:${USER} .
